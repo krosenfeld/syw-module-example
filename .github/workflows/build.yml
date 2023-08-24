@@ -15,10 +15,13 @@ jobs:
           fetch-depth: 0
 
       - name: Enable ssh-agent
+        env: 
+            super_secret: ${{ secrets.SSH_PRIVATE_KEY }}
+        if: ${{ env.super_secret != '' }}        
         uses: webfactory/ssh-agent@v0.8.0
         with:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}       
-            
+
       - name: Build the article PDF
         id: build
         uses: showyourwork/showyourwork-action@v1
