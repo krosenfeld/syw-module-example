@@ -21,9 +21,24 @@ This example shows how to incorporate a project specific python module (called `
 
 1. Create a pyproject.toml or setup.py (here I use `pyproject.toml`` with a requirements.txt file)
 2. Add your module with the appropriate `__init__.py ` files. 
-3. Add the pip  VCS install to the `environment.yml` file.
+3. Add the pip VCS install to the `environment.yml` file. E.g.:
+```
+git+https://github.com/krosenfeld/syw-module-example.git#egg=module
+```
 
-Note: This has been tested with public repositories.
+For a private repository follow the steps to enable the [ssh-agent action](https://github.com/webfactory/ssh-agent):
+
+1. Generate a new SSH key with sufficient access privileges. For security reasons, don't use your personal SSH key but set up a dedicated one for use in GitHub Actions. See below for a few hints if you are unsure about this step.
+2. Make sure you don't have a passphrase set on the private key.
+3. Add the public SSH key to the private repository you are pulling from during the Github Action as a 'Deploy Key'.
+4. Add the private SSH key to the repository triggering the Github Action: 
+    * In your repository, go to the *Settings > Secrets* menu and create a new secret.  Call it `SSH_PRIVATE_KEY`. 
+    * Put the contents of the *private* SSH key file into the contents field. <br>
+    * This key should start with `-----BEGIN ... PRIVATE KEY-----`, consist of many lines and ends with `-----END ... PRIVATE KEY-----`. 
+5. Make sure that the pip VCS install  in `environment.yml` uses `git+ssh`. E.g.:
+```
+git+ssh://git@github.com/krosenf/syw-module-example.git#egg=module
+```
 
 ## Installation
 
