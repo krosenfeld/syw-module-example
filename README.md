@@ -17,7 +17,7 @@
 
 An open source scientific article created using the [showyourwork](https://github.com/showyourwork/showyourwork) workflow.
 
-This example shows how to incorporate a project specific python module (called `module`). The basic steps are:
+This example shows how to incorporate a project specific python module (called `module`). After initializing using the basic `showyourwork` commands the basic steps are:
 
 1. Create a pyproject.toml or setup.py (here I use `pyproject.toml`` with a requirements.txt file)
 2. Add your module with the appropriate `__init__.py ` files. 
@@ -25,8 +25,17 @@ This example shows how to incorporate a project specific python module (called `
 ```
 git+https://github.com/krosenfeld/syw-module-example.git#egg=module
 ```
-
-For a private repository follow the steps to enable the [ssh-agent action](https://github.com/webfactory/ssh-agent):
+4. Update the .github/workflows/build.yml file with this step before `Build the article PDF`.
+```yaml
+      - name: Enable ssh-agent
+        env: 
+            super_secret: ${{ secrets.SSH_PRIVATE_KEY }}
+        if: ${{ env.super_secret != '' }}        
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}      
+```
+For a private repository follow these additional steps to enable the [ssh-agent action](https://github.com/webfactory/ssh-agent):
 
 1. Generate a new SSH key with sufficient access privileges. For security reasons, don't use your personal SSH key but set up a dedicated one for use in GitHub Actions. See below for a few hints if you are unsure about this step.
 2. Make sure you don't have a passphrase set on the private key.
