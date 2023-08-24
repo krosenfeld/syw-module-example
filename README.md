@@ -16,3 +16,19 @@
 </p>
 
 An open source scientific article created using the [showyourwork](https://github.com/showyourwork/showyourwork) workflow.
+
+## Installation
+
+Install mamba environment:
+```bash
+mamba env create -f environment.yml --prefix ./env
+```
+Update the environment:
+```bash
+mamba env update --prefix ./env --file environment.yml  --prune
+```
+## Build
+
+```bash
+showyourwork build --conda-frontend=mamba
+```
