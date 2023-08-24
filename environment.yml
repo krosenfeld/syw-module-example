@@ -4,4 +4,5 @@ dependencies:
   - conda-forge::python=3.9
   - pip:
       - matplotlib==3.4.3
-      - git+https://github.com/krosenfeld/syw-module-example.git
+      # - git+https://github.com/krosenfeld/syw-module-example.git
+      - git+ssh://git@github.com/krosenfeld/syw-module-example.git

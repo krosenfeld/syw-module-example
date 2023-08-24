@@ -17,6 +17,14 @@
 
 An open source scientific article created using the [showyourwork](https://github.com/showyourwork/showyourwork) workflow.
 
+This example shows how to incorporate a project specific python module (called `module`). The basic steps are:
+
+1. Create a pyproject.toml or setup.py (here I use `pyproject.toml`` with a requirements.txt file)
+2. Add your module with the appropriate `__init__.py ` files. 
+3. Add the pip  VCS install to the `environment.yml` file.
+
+Note: This has been tested with public repositories.
+
 ## Installation
 
 Install mamba environment:
